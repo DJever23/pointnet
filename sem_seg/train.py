@@ -16,6 +16,11 @@ import provider
 import tf_util
 from model import *
 
+os.environ["CUDA_VISIBLE_DEVICES"] = '0' #use GPU with ID=0
+config = tf.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.5 # maximun alloc gpu50% of MEM
+config.gpu_options.allow_growth = True #allocate dynamically
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
 parser.add_argument('--log_dir', default='log', help='Log dir [default: log]')

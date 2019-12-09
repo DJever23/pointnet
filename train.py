@@ -14,6 +14,11 @@ sys.path.append(os.path.join(BASE_DIR, 'utils'))
 import provider
 import tf_util
 
+os.environ["CUDA_VISIBLE_DEVICES"] = '0' #use GPU with ID=0
+config = tf.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.5 # maximun alloc gpu50% of MEM
+config.gpu_options.allow_growth = True #allocate dynamically
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
 parser.add_argument('--model', default='pointnet_cls', help='Model name: pointnet_cls or pointnet_cls_basic [default: pointnet_cls]')
